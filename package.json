@@ -1,7 +1,7 @@
 {
   "scripts": {
     "play": "node --import ./lib/ts-node.register.mjs index.ts",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "type": "module",
   "private": true,
