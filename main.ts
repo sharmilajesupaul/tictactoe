@@ -18,7 +18,11 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
     });
   }
 
-  player1 = player1 ?? new Player(player1Name, "X", "magentaBright");
+  player1 = player1 ?? new Player({
+    name: player1Name,
+    icon: "X",
+    color: "magentaBright",
+  });
 
   let player2Name = "Player 2";
   if (!player2) {
@@ -34,9 +38,13 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
     });
   }
 
-  player2 = player2 ?? new Player(player2Name, "O", "blueBright");
+  player2 = player2 ?? new Player({
+    name: player2Name,
+    icon: "O",
+    color: "cyanBright",
+  });
 
-  const game = new TicTacToe(player1, player2);
+  const game = new TicTacToe({ player1, player2 });
   await game.startGame();
 
   printScore(player1, player2);

@@ -6,7 +6,15 @@ class Player {
   private score: number = 0;
   private color: ColorName;
 
-  constructor(name: string, icon: string, color: ColorName) {
+  constructor({
+    name,
+    icon,
+    color,
+  }: {
+    name: string;
+    icon: string;
+    color: ColorName;
+  }) {
     this.name = name;
     this.icon = icon;
     this.color = color;
