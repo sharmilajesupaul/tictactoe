@@ -1,12 +1,15 @@
+import type { ColorName } from "chalk";
 class Player {
   private name: string;
   private icon: string;
   private score: number = 0;
   private positions: number[] = [];
+  private color: ColorName;
 
-  constructor(name: string, icon: string) {
+  constructor(name: string, icon: string, color: ColorName) {
     this.name = name;
     this.icon = icon;
+    this.color = color;
   }
 
   getName() {
@@ -19,6 +22,10 @@ class Player {
 
   getScore() {
     return this.score;
+  }
+
+  getColor() {
+    return this.color;
   }
 
   incrementScore() {

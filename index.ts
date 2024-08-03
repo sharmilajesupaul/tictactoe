@@ -1,78 +1,64 @@
 import chalk from 'chalk';
 import { select, input } from '@inquirer/prompts';
 import Player from './Player.ts';
-import Board from './Board.ts';
+import TicTacToe from './TicTacToe.ts';
 
 type GameMode = "player" | "computer" | "exit";
 
-export class TicTacToe {
-  private player1: Player;
-  private player2: Player;
-  private board: Board;
+async function playAgainPrompt() {
+  return select({
+    message: "Do you want to play again?",
+    choices: [
+      { name: "Yes", value: true },
+      { name: "No", value: false },
+    ],
+  });
+}
 
-  constructor(player1: Player, player2: Player) {
-    this.player1 = player1;
-    this.player2 = player2;
-    this.board = new Board();
-  }
+function printScore(player1: Player, player2: Player) {
+  const winningPlayer = player1.getScore() > player2.getScore() ? player1 : player2;
 
-  async playTurn(player: Player) {
-    console.clear();
-    console.log(chalk.green(`${player.getName()}'s turn`));
-    this.board.printBoard();
+  console.log();
+  console.log(`Current score:`);
+  console.log(`${chalk[player1.getColor()](player1.getName())}: ${player1.getScore()} ${player1.getName() === winningPlayer.getName() ? "👑" : ""}`);
+  console.log(`${chalk[player1.getColor()](player2.getName())}: ${player2.getScore()} ${player2.getName() === winningPlayer.getName() ? "👑" : ""}`);
+  console.log();
+}
 
-    const position = await input({
-      message: "Enter position",
-      validate: (input) => {
-        const position = parseInt(input);
-        if (isNaN(position) || position < 0 || position > 8) {
-          return "Invalid position. Please enter a number between 1 and 9";
-        }
+async function playerVsPlayer(player1: Player | null = null, player2: Player | null = null) {
+  console.log(chalk.blue("Player vs. Player mode"));
 
-        if (!this.board.positionAvailable(position)) {
-          return "Position already taken. Please enter a different position";
-        }
-
-        return true;
-      },
+  let player1Name = "Player 1";
+  if (!player1) {
+    player1Name = await input({
+      message: "Enter player 1 name",
+      default: "Player 1",
     });
-
-    player.addPosition(parseInt(position));
-    this.board.updateBoard(parseInt(position), player.getIcon());
-
-    console.clear();
-    this.board.printBoard();
-
   }
 
-  async startGame() {
-    console.log(chalk.blue("Game started!"));
-    console.log();
-    console.log(chalk.green(`${this.player1.getName()} is ${this.player1.getIcon()}`));
-    console.log(chalk.green(`${this.player2.getName()} is ${this.player2.getIcon()}`));
-    console.log();
+  player1 = player1 ?? new Player(player1Name, "X", "magenta");
+  let player2Name = "Player 2";
+  if (!player2) {
+    player2Name = await input({
+      message: "Enter player 2 name",
+      default: "Player 2",
+    });
+  }
 
-    let currentPlayer = this.player1;
-    let winner = null;
-    let count = 0;
+  player2 = player2 ?? new Player(player2Name, "O", "blue");
 
-    while (!winner && count <= 9) {
-      count++;
-      await this.playTurn(currentPlayer);
-      winner = this.board.checkWinner();
+  const game = new TicTacToe(player1, player2);
+  await game.startGame();
 
-      if (winner) {
-        break;
-      }
+  
+  printScore(player1, player2);
 
-      currentPlayer = currentPlayer === this.player1 ? this.player2 : this.player1;
-    }
+  const playAgain = await playAgainPrompt();
 
-    if (winner) {
-      console.log(chalk.green(`🎉 ${currentPlayer.getName()} wins! 🎉`));
-    } else {
-      console.log(chalk.yellow("It's a tie!"));
-    }
+  if (playAgain) {
+    await playerVsPlayer(player1, player2);
+  } else {    
+    console.log(chalk.red("Exiting..."));
   }
 }
 
@@ -97,22 +83,9 @@ async function main() {
     return;
   }
 
-  const player1Name = await input({
-    message: "Enter player 1 name",
-    default: "Player 1",
-  });
-
-  const player1 = new Player(player1Name, "🙅");
-
-  const player2Name = await input({
-    message: "Enter player 2 name",
-    default: "Player 2",
-  });
-
-  const player2 = new Player(player2Name, "🍩");
-
-  const game = new TicTacToe(player1, player2);
-  await game.startGame();
+  if (mode === "player") {
+    await playerVsPlayer();
+  }
 }
 
 main();
