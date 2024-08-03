@@ -65,7 +65,7 @@ async function main() {
   }
 
   if (mode === "player") {
-    await playerVsPlayer();
+    return playerVsPlayer();
   }
 }
 
