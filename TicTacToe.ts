@@ -16,16 +16,6 @@ export class TicTacToe {
   }
 
   async startGame() {
-    console.log(chalk.blue('Game started!'));
-    console.log();
-    console.log(
-      chalk.green(`${this.player1.getName()} is ${this.player1.getIcon()}`),
-    );
-    console.log(
-      chalk.green(`${this.player2.getName()} is ${this.player2.getIcon()}`),
-    );
-    console.log();
-
     // Randomly select the first player
     let currentPlayer = Math.random() < 0.5 ? this.player1 : this.player2;
     let winner = null;
