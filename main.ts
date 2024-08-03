@@ -1,30 +1,10 @@
 import chalk from 'chalk';
 import { select, input } from '@inquirer/prompts';
-import { loudLog } from './helpers.ts';
+import { loudLog, playAgainPrompt, printScore } from './helpers.ts';
 import Player from './Player.ts';
 import TicTacToe from './TicTacToe.ts';
 
 type GameMode = "player" | "computer" | "exit";
-
-async function playAgainPrompt() {
-  return select({
-    message: "Do you want to play again?",
-    choices: [
-      { name: "Yes", value: true },
-      { name: "No", value: false },
-    ],
-  });
-}
-
-function printScore(player1: Player, player2: Player) {
-  const winningPlayer = player1.getScore() > player2.getScore() ? player1 : player2;
-
-  console.log();
-  console.log(chalk.bold(`Current score:`));
-  console.log(`${chalk[player1.getColor()](player1.getName())}: ${player1.getScore()} ${player1.getName() === winningPlayer.getName() ? "👑" : ""}`);
-  console.log(`${chalk[player1.getColor()](player2.getName())}: ${player2.getScore()} ${player2.getName() === winningPlayer.getName() ? "👑" : ""}`);
-  console.log();
-}
 
 async function playerVsPlayer(player1: Player | null = null, player2: Player | null = null) {
   console.clear();
@@ -34,16 +14,17 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
   if (!player1) {
     player1Name = await input({
       message: "Enter player 1 name",
-      default: "Player 1",
+      default: player1Name,
     });
   }
 
   player1 = player1 ?? new Player(player1Name, "X", "magentaBright");
+
   let player2Name = "Player 2";
   if (!player2) {
     player2Name = await input({
       message: "Enter player 2 name",
-      default: "Player 2",
+      default: player2Name,
     });
   }
 

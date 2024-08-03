@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { input, select } from "@inquirer/prompts";
+import { input } from "@inquirer/prompts";
 import Player from "./Player.ts";
 import Board from "./Board.ts";
 import { loudLog, smallDelaySpinner } from "./helpers.ts";
