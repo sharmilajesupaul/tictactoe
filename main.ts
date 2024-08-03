@@ -41,7 +41,7 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
   player2 = player2 ?? new Player({
     name: player2Name,
     icon: "O",
-    color: "cyanBright",
+    color: "blueBright",
   });
 
   const game = new TicTacToe({ player1, player2 });
