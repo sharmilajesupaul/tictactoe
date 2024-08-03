@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { select, input } from '@inquirer/prompts';
+import { loudLog } from './helpers.ts';
 import Player from './Player.ts';
 import TicTacToe from './TicTacToe.ts';
 
@@ -26,7 +27,8 @@ function printScore(player1: Player, player2: Player) {
 }
 
 async function playerVsPlayer(player1: Player | null = null, player2: Player | null = null) {
-  console.log(chalk.blue("Player vs. Player mode"));
+  console.clear();
+  loudLog(chalk.bgBlack.white("Player vs. Player mode"));
 
   let player1Name = "Player 1";
   if (!player1) {
@@ -36,7 +38,7 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
     });
   }
 
-  player1 = player1 ?? new Player(player1Name, "X", "magenta");
+  player1 = player1 ?? new Player(player1Name, "X", "magentaBright");
   let player2Name = "Player 2";
   if (!player2) {
     player2Name = await input({
@@ -45,7 +47,7 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
     });
   }
 
-  player2 = player2 ?? new Player(player2Name, "O", "blue");
+  player2 = player2 ?? new Player(player2Name, "O", "blueBright");
 
   const game = new TicTacToe(player1, player2);
   await game.startGame();

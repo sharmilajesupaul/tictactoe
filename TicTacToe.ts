@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { input, select } from "@inquirer/prompts";
 import Player from "./Player.ts";
 import Board from "./Board.ts";
-import { smallDelaySpinner } from "./helpers.ts";
+import { loudLog, smallDelaySpinner } from "./helpers.ts";
 
 export class TicTacToe {
   private player1: Player;
@@ -22,7 +22,7 @@ export class TicTacToe {
     // Use a different color for each player in the terminal
     const terminalPlayerColor = chalk[player.getColor()];
 
-    console.log(chalk.bold(terminalPlayerColor(`${player.getName()}'s turn!`)));
+    loudLog(terminalPlayerColor(`${player.getName()}'s turn!`));
     this.board.printBoard();
 
     const position = parseInt(await input({
