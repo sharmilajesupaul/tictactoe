@@ -3,6 +3,7 @@
 ## Dependencies
 
 This project uses the following dependencies:
+
 - Node.js >= 20.0.0 Downloadable at https://nodejs.org/en/download/
 - Yarn >= 1.22.0, once you have Node.js installed, you can install Yarn by running `npm install -g yarn`
 

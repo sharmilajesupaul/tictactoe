@@ -18,24 +18,27 @@ export function loudLog(str: string) {
 /** Prompt the user if they want to play again */
 export async function playAgainPrompt() {
   return select({
-    message: "Do you want to play again?",
+    message: 'Do you want to play again?',
     choices: [
-      { name: "Yes", value: true },
-      { name: "No", value: false },
+      { name: 'Yes', value: true },
+      { name: 'No', value: false },
     ],
   });
 }
 
 /** Print the current score of both players */
 export function printScore(player1: Player, player2: Player) {
-  let winningPlayer: string = player1.getScore() > player2.getScore() ? player1.getName() : player2.getName();
+  let winningPlayer: string =
+    player1.getScore() > player2.getScore()
+      ? player1.getName()
+      : player2.getName();
   if (player1.getScore() === player2.getScore()) {
-    winningPlayer = "";
+    winningPlayer = '';
   }
 
   const scoreText = (player: Player, winningPlayer: string) => {
-    return `${chalk[player.getColor()](player.getName())}: ${player.getScore()} ${player.getName() === winningPlayer ? "👑" : ""}`;
-  }
+    return `${chalk[player.getColor()](player.getName())}: ${player.getScore()} ${player.getName() === winningPlayer ? '👑' : ''}`;
+  };
 
   console.log();
   console.log(chalk.bold(`Scoreboard:`));

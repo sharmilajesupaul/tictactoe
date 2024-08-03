@@ -1,4 +1,4 @@
-import type { ColorName } from "chalk";
+import type { ColorName } from 'chalk';
 
 class Player {
   private name: string;

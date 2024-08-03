@@ -4,45 +4,52 @@ import { loudLog, playAgainPrompt, printScore } from './helpers.ts';
 import Player from './Player.ts';
 import TicTacToe from './TicTacToe.ts';
 
-type GameMode = "player" | "computer" | "exit";
+type GameMode = 'player' | 'computer' | 'exit';
 
-async function playerVsPlayer(player1: Player | null = null, player2: Player | null = null) {
+async function playerVsPlayer(
+  player1: Player | null = null,
+  player2: Player | null = null,
+) {
   console.clear();
-  loudLog(chalk.bgBlack.white("Player vs. Player mode"));
+  loudLog(chalk.bgBlack.white('Player vs. Player mode'));
 
-  let player1Name = "Player 1";
+  let player1Name = 'Player 1';
   if (!player1) {
     player1Name = await input({
-      message: "Enter player 1 name",
+      message: 'Enter player 1 name',
       default: player1Name,
     });
   }
 
-  player1 = player1 ?? new Player({
-    name: player1Name,
-    icon: "X",
-    color: "magentaBright",
-  });
+  player1 =
+    player1 ??
+    new Player({
+      name: player1Name,
+      icon: 'X',
+      color: 'magentaBright',
+    });
 
-  let player2Name = "Player 2";
+  let player2Name = 'Player 2';
   if (!player2) {
     player2Name = await input({
-      message: "Enter player 2 name",
+      message: 'Enter player 2 name',
       default: player2Name,
       validate: (input) => {
         if (input === player1Name) {
-          return "Please enter a different name, this name is already taken";
+          return 'Please enter a different name, this name is already taken';
         }
         return true;
-      }
+      },
     });
   }
 
-  player2 = player2 ?? new Player({
-    name: player2Name,
-    icon: "O",
-    color: "blueBright",
-  });
+  player2 =
+    player2 ??
+    new Player({
+      name: player2Name,
+      icon: 'O',
+      color: 'blueBright',
+    });
 
   const game = new TicTacToe({ player1, player2 });
   await game.startGame();
@@ -56,31 +63,31 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
   if (playAgain) {
     return playerVsPlayer(player1, player2);
   } else {
-    console.log(chalk.red("Exiting..."));
+    console.log(chalk.red('Exiting...'));
   }
 }
 
 async function main() {
   const mode: GameMode = await select({
-    message: "Select game mode",
+    message: 'Select game mode',
     choices: [
-      { name: "Player vs. Player", value: "player" },
-      { name: "Player vs. Computer", value: "computer" },
-      { name: "Exit", value: "exit" },
+      { name: 'Player vs. Player', value: 'player' },
+      { name: 'Player vs. Computer', value: 'computer' },
+      { name: 'Exit', value: 'exit' },
     ],
   });
 
-  if (mode === "exit") {
-    console.log(chalk.red("Exiting..."));
-    return
-  }
-
-  if (mode === "computer") {
-    console.log(chalk.red("Computer mode not implemented yet, exiting..."));
+  if (mode === 'exit') {
+    console.log(chalk.red('Exiting...'));
     return;
   }
 
-  if (mode === "player") {
+  if (mode === 'computer') {
+    console.log(chalk.red('Computer mode not implemented yet, exiting...'));
+    return;
+  }
+
+  if (mode === 'player') {
     return playerVsPlayer();
   }
 }

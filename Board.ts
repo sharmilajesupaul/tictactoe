@@ -9,7 +9,7 @@ class Board {
 
   printBoard() {
     console.log();
-    console.log(this.board.map((row) => row.join(" | ")).join("\n---------\n"));
+    console.log(this.board.map((row) => row.join(' | ')).join('\n---------\n'));
     console.log();
   }
 
@@ -27,9 +27,17 @@ class Board {
   // TODO: Add a check for a draw
   checkWinner() {
     const winningCombinations: number[][] = [
-      [1, 2, 3], [4, 5, 6], [7, 8, 9], // Rows
-      [1, 4, 7], [2, 5, 8], [3, 6, 9], // Columns
-      [1, 5, 9], [3, 5, 7], // Diagonals
+      // Rows
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      // Columns
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 6, 9],
+      // Diagonals
+      [1, 5, 9],
+      [3, 5, 7],
     ];
 
     for (const combination of winningCombinations) {
@@ -52,11 +60,11 @@ class Board {
 
   validatePosition(position: number) {
     if (isNaN(position) || !this.isValidPosition(position)) {
-      return "Invalid position. Please enter a number between 1 and 9"
+      return 'Invalid position. Please enter a number between 1 and 9';
     }
 
     if (!this.positionAvailable(position)) {
-      return "Position already taken. Please enter a different position";
+      return 'Position already taken. Please enter a different position';
     }
 
     return true;
@@ -71,7 +79,7 @@ class Board {
       }
     }
 
-    return false
+    return false;
   }
 
   private isValidPosition(position: number) {
@@ -82,7 +90,7 @@ class Board {
     const row = Math.floor((position - 1) / 3);
     const col = (position - 1) % 3;
     return { row, col };
-  };
+  }
 }
 
 export default Board;
