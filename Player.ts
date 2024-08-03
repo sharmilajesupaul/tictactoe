@@ -1,4 +1,5 @@
 import type { ColorName } from "chalk";
+
 class Player {
   private name: string;
   private icon: string;
