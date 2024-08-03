@@ -24,6 +24,7 @@ class Board {
     }
   }
 
+  // TODO: Add a check for a draw
   checkWinner() {
     const winningCombinations: number[][] = [
       [1, 2, 3], [4, 5, 6], [7, 8, 9], // Rows

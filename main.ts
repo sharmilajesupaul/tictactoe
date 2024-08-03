@@ -41,11 +41,13 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
 
   printScore(player1, player2);
 
+  // TODO: Add a reset score option?
+  // TODO: Add a change mode option?
   const playAgain = await playAgainPrompt();
 
   if (playAgain) {
     return playerVsPlayer(player1, player2);
-  } else {    
+  } else {
     console.log(chalk.red("Exiting..."));
   }
 }
