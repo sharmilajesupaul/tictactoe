@@ -49,18 +49,6 @@ class Board {
     return false;
   }
 
-  positionAvailable(position: number) {
-    for (const row of this.board) {
-      for (const cell of row) {
-        if (cell === position) {
-          return true;
-        }
-      }
-    }
-
-    return false
-  }
-
   validatePosition(position: number) {
     if (isNaN(position) || !this.isValidPosition(position)) {
       return "Invalid position. Please enter a number between 1 and 9"
@@ -73,6 +61,17 @@ class Board {
     return true;
   }
 
+  private positionAvailable(position: number) {
+    for (const row of this.board) {
+      for (const cell of row) {
+        if (cell === position) {
+          return true;
+        }
+      }
+    }
+
+    return false
+  }
 
   private isValidPosition(position: number) {
     return position >= 1 && position <= 9;
