@@ -31,9 +31,13 @@ export function printScore(player1: Player, player2: Player) {
     winningPlayer = "";
   }
 
+  const scoreText = (player: Player, winningPlayer: string) => {
+    return `${chalk[player.getColor()](player.getName())}: ${player.getScore()} ${player.getName() === winningPlayer ? "👑" : ""}`;
+  }
+
   console.log();
-  console.log(chalk.bold(`Current score:`));
-  console.log(`${chalk[player1.getColor()](player1.getName())}: ${player1.getScore()} ${player1.getName() === winningPlayer ? "👑" : ""}`);
-  console.log(`${chalk[player2.getColor()](player2.getName())}: ${player2.getScore()} ${player2.getName() === winningPlayer ? "👑" : ""}`);
+  console.log(chalk.bold(`Scoreboard:`));
+  console.log(scoreText(player1, winningPlayer));
+  console.log(scoreText(player2, winningPlayer));
   console.log();
 }
