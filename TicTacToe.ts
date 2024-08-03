@@ -30,7 +30,6 @@ export class TicTacToe {
       validate: (input) => this.board.validatePosition(parseInt(input)),
     }));
 
-    player.addPosition(position);
     this.board.updateBoard(position, terminalPlayerColor(player.getIcon()));
 
     console.clear();
@@ -44,7 +43,8 @@ export class TicTacToe {
     console.log(chalk.green(`${this.player2.getName()} is ${this.player2.getIcon()}`));
     console.log();
 
-    let currentPlayer = this.player1;
+    // Randomly select the first player
+    let currentPlayer = Math.random() < 0.5 ? this.player1 : this.player2;
     let winner = null;
     let count = 0;
 
