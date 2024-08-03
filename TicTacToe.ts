@@ -17,7 +17,7 @@ export class TicTacToe {
 
   async playTurn(player: Player) {
     console.clear();
-    await smallDelaySpinner(`Preparing board for ${player.getName()}`);
+    await smallDelaySpinner(`Preparing board for ${player.getName()}`, 200);
 
     // Use a different color for each player in the terminal
     const terminalPlayerColor = chalk[player.getColor()];

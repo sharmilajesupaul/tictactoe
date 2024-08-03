@@ -4,9 +4,9 @@ import Player from './Player.ts';
 import { select } from '@inquirer/prompts';
 
 // add a small delay to make the game more enjoyable
-export async function smallDelaySpinner(spinnerText = '') {
+export async function smallDelaySpinner(spinnerText = '', delay = 300) {
   const spinner = ora(spinnerText).start();
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  await new Promise((resolve) => setTimeout(resolve, delay));
   spinner.stop();
 }
 
@@ -34,6 +34,6 @@ export function printScore(player1: Player, player2: Player) {
   console.log();
   console.log(chalk.bold(`Current score:`));
   console.log(`${chalk[player1.getColor()](player1.getName())}: ${player1.getScore()} ${player1.getName() === winningPlayer ? "👑" : ""}`);
-  console.log(`${chalk[player1.getColor()](player2.getName())}: ${player2.getScore()} ${player2.getName() === winningPlayer ? "👑" : ""}`);
+  console.log(`${chalk[player2.getColor()](player2.getName())}: ${player2.getScore()} ${player2.getName() === winningPlayer ? "👑" : ""}`);
   console.log();
 }

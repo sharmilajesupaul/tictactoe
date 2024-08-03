@@ -25,6 +25,12 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
     player2Name = await input({
       message: "Enter player 2 name",
       default: player2Name,
+      validate: (input) => {
+        if (input === player1Name) {
+          return "Please enter a different name, this name is already taken";
+        }
+        return true;
+      }
     });
   }
 
