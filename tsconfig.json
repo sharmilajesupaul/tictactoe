@@ -9,4 +9,7 @@
     "allowImportingTsExtensions": true,                  /* Allow importing .ts files. */
     "noEmit": true,                                     /* Do not emit outputs. */
   },
+  "ts-node": {
+    "transpileOnly": true,
+  },
 }
