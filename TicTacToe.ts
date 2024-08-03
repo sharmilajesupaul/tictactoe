@@ -21,27 +21,6 @@ export class TicTacToe {
     this.board = new Board();
   }
 
-  async playTurn(player: Player) {
-    console.clear();
-    await smallDelaySpinner(`Preparing board for ${player.getName()}`, 200);
-
-    // Use a different color for each player in the terminal
-    const terminalPlayerColor = chalk[player.getColor()];
-
-    loudLog(terminalPlayerColor(`${player.getName()}'s turn!`));
-    this.board.printBoard();
-
-    const position = parseInt(await input({
-      message: "Choose a position on the board, from 1 to 9",
-      validate: (input) => this.board.validatePosition(parseInt(input)),
-    }));
-
-    this.board.updateBoard(position, terminalPlayerColor(player.getIcon()));
-
-    console.clear();
-    this.board.printBoard();
-  }
-
   async startGame() {
     console.log(chalk.blue("Game started!"));
     console.log();
@@ -76,6 +55,27 @@ export class TicTacToe {
     } else {
       console.log(chalk.yellow("It's a tie! 🤝"));
     }
+  }
+
+  private async playTurn(player: Player) {
+    console.clear();
+    await smallDelaySpinner(`Preparing board for ${player.getName()}`, 200);
+
+    // Use a different color for each player in the terminal
+    const terminalPlayerColor = chalk[player.getColor()];
+
+    loudLog(terminalPlayerColor(`${player.getName()}'s turn!`));
+    this.board.printBoard();
+
+    const position = parseInt(await input({
+      message: "Choose a position on the board, from 1 to 9",
+      validate: (input) => this.board.validatePosition(parseInt(input)),
+    }));
+
+    this.board.updateBoard(position, terminalPlayerColor(player.getIcon()));
+
+    console.clear();
+    this.board.printBoard();
   }
 }
 
