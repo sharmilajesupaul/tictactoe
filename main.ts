@@ -19,7 +19,7 @@ function printScore(player1: Player, player2: Player) {
   const winningPlayer = player1.getScore() > player2.getScore() ? player1 : player2;
 
   console.log();
-  console.log(`Current score:`);
+  console.log(chalk.bold(`Current score:`));
   console.log(`${chalk[player1.getColor()](player1.getName())}: ${player1.getScore()} ${player1.getName() === winningPlayer.getName() ? "👑" : ""}`);
   console.log(`${chalk[player1.getColor()](player2.getName())}: ${player2.getScore()} ${player2.getName() === winningPlayer.getName() ? "👑" : ""}`);
   console.log();
@@ -50,7 +50,6 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
   const game = new TicTacToe(player1, player2);
   await game.startGame();
 
-  
   printScore(player1, player2);
 
   const playAgain = await playAgainPrompt();
@@ -78,7 +77,6 @@ async function main() {
   }
 
   if (mode === "computer") {
-    // not implemented yet
     console.log(chalk.red("Computer mode not implemented yet, exiting..."));
     return;
   }
