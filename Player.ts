@@ -4,7 +4,6 @@ class Player {
   private name: string;
   private icon: string;
   private score: number = 0;
-  private positions: number[] = [];
   private color: ColorName;
 
   constructor(name: string, icon: string, color: ColorName) {
@@ -35,18 +34,6 @@ class Player {
 
   resetScore() {
     this.score = 0;
-  }
-
-  getPositions() {
-    return this.positions;
-  }
-
-  addPosition(position: number) {
-    this.positions.push(position);
-  }
-
-  resetPositions() {
-    this.positions = [];
   }
 }
 
