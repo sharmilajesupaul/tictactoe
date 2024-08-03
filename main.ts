@@ -44,7 +44,7 @@ async function playerVsPlayer(player1: Player | null = null, player2: Player | n
   const playAgain = await playAgainPrompt();
 
   if (playAgain) {
-    await playerVsPlayer(player1, player2);
+    return playerVsPlayer(player1, player2);
   } else {    
     console.log(chalk.red("Exiting..."));
   }
