@@ -1,7 +1,7 @@
 {
   "scripts": {
     "play": "node --import ./lib/ts-node.register.mjs main.ts",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "NODE_OPTIONS='--experimental-vm-modules --disable-warning=ExperimentalWarning' jest",
     "format": "prettier --write --single-quote ."
   },
   "type": "module",
